@@ -1,0 +1,484 @@
+{
+  "package": "@arki/seo",
+  "version": "0.1.1",
+  "entries": [
+    {
+      "subpath": ".",
+      "name": "ActionableInsightsData",
+      "kind": "type",
+      "signature": "export type ActionableInsightsData = { /** Section heading */ heading: string; /** Introductory paragraph */ content: string; /** List of recommended action items */ actionItems: string[]; };",
+      "jsdocSummary": "Data for an actionable insights section"
+    },
+    {
+      "subpath": ".",
+      "name": "ArticleData",
+      "kind": "type",
+      "signature": "export type ArticleData = { title: string; description: string; url: string; publishedAt: Date | string; modifiedAt?: Date | string; author: { name: string; url?: string; }; image?: string; };",
+      "jsdocSummary": ""
+    },
+    {
+      "subpath": ".",
+      "name": "ArticleMetaData",
+      "kind": "type",
+      "signature": "export type ArticleMetaData = { /** ISO 8601 date string when the article was first published */ datePublished: string; /** ISO 8601 date string when the article was last modified */ dateModified?: string; };",
+      "jsdocSummary": "Article metadata for TechArticle JSON-LD emission."
+    },
+    {
+      "subpath": ".",
+      "name": "ArticleSchemaProps",
+      "kind": "type",
+      "signature": "export type ArticleSchemaProps = { article: ArticleData; siteName: string; siteUrl: string; };",
+      "jsdocSummary": "Props for ArticleSchema"
+    },
+    {
+      "subpath": ".",
+      "name": "BreadcrumbItem",
+      "kind": "type",
+      "signature": "export type BreadcrumbItem = { href: string; label: string; };",
+      "jsdocSummary": ""
+    },
+    {
+      "subpath": ".",
+      "name": "BreadcrumbSchemaProps",
+      "kind": "type",
+      "signature": "export type BreadcrumbSchemaProps = { items: BreadcrumbItem[]; siteUrl: string; };",
+      "jsdocSummary": "Props for BreadcrumbSchema"
+    },
+    {
+      "subpath": ".",
+      "name": "CalculationStep",
+      "kind": "type",
+      "signature": "export type CalculationStep = { /** What is being calculated */ label: string; /** The computed value or expression */ value: string; };",
+      "jsdocSummary": "A single calculation step within a deep-dive example."
+    },
+    {
+      "subpath": ".",
+      "name": "ChangeFreq",
+      "kind": "type",
+      "signature": "export type ChangeFreq = 'always' | 'hourly' | 'daily' | 'weekly' | 'monthly' | 'yearly' | 'never';",
+      "jsdocSummary": "Framework-agnostic sitemap.xml builders."
+    },
+    {
+      "subpath": ".",
+      "name": "createToolMetadata",
+      "kind": "function",
+      "signature": "export declare function createToolMetadata({ title, description, path, keywords, siteName, siteUrl, }: ToolMetadataInput): { title: string; description: string; keywords: string[] | undefined; alternates: { canonical: string; }; openGraph: { title: string; description: string; url: string; type: 'website'; }; twitter: { title: string; description: string; }; };",
+      "jsdocSummary": "Creates consistent metadata for tool/app pages. Generates title, description, canonical URL, OpenGraph, and Twitter card metadata."
+    },
+    {
+      "subpath": ".",
+      "name": "DeepDiveExample",
+      "kind": "type",
+      "signature": "export type DeepDiveExample = { /** Example title */ title: string; /** Industry or domain context (e.g., \"construction\", \"sports\", \"cooking\") */ industry?: string; /** The scenario setup — who is doing what and why */ scenario: string; /** Step-by-step calculation walkthrough */ calculationSteps: CalculationStep[]; /** Optional before/after comparison */ comparison?: { before: string; after: string; }; /** Practical decision guidance based on the results */ decisionGuidance: string; };",
+      "jsdocSummary": "Rich use-case example with multi-step calculations and decision guidance."
+    },
+    {
+      "subpath": ".",
+      "name": "EducationalSection",
+      "kind": "type",
+      "signature": "export type EducationalSection = { /** Section heading */ heading: string; /** Introductory paragraph */ content: string; /** Determines the rendering strategy for supplementary items */ type: 'text' | 'list' | 'comparison' | 'table' | 'callout' | 'steps' | 'formula' | 'stat-highlight'; /** Items to render below the content paragraph. Shape depends on `type`: * - `list` / `steps`: `string[]` * - `comparison` / `table` / `stat-highlight`: `Record<string, string>` (key → value) * - `text` / `callout` / `formula`: ignored */ items?: string[] | Record<string, string>; /** Callout variant — only used when `type` is `callout` */ variant?: 'info' | 'warning' | 'tip'; /** Math formula string — only used when `type` is `formula`. * Rendered as-is in a styled block (KaTeX rendering can be added later). */ formula?: string; };",
+      "jsdocSummary": "A structured educational section with type-specific rendering."
+    },
+    {
+      "subpath": ".",
+      "name": "ExampleItem",
+      "kind": "type",
+      "signature": "export type ExampleItem = { /** Example title */ heading: string; /** The scenario or setup */ scenario: string; /** Explanation of the calculation or process */ explanation: string; /** Key insight the reader should take away */ takeaway: string; /** Optional input values for \"try this example\" interactivity. * When provided alongside `renderExampleAction` in ExampleShowcase, * enables users to pre-fill a calculator with these values. */ inputs?: Record<string, unknown>; };",
+      "jsdocSummary": "A worked example with scenario, explanation, and key takeaway"
+    },
+    {
+      "subpath": ".",
+      "name": "FAQItem",
+      "kind": "type",
+      "signature": "export type FAQItem = { question: string; answer: string; /** ISO YYYY-MM-DD when the FAQ first appeared. Optional; emitted into FAQPage JSON-LD as `datePublished` for AEO freshness signaling. */ datePublished?: string; /** ISO YYYY-MM-DD of the most recent meaningful edit. Optional; emitted into FAQPage JSON-LD as `dateModified`. */ dateModified?: string; };",
+      "jsdocSummary": ""
+    },
+    {
+      "subpath": ".",
+      "name": "FAQSchemaProps",
+      "kind": "type",
+      "signature": "export type FAQSchemaProps = { faqs: FAQItem[]; };",
+      "jsdocSummary": "Props for FAQSchema"
+    },
+    {
+      "subpath": ".",
+      "name": "FAQSectionProps",
+      "kind": "type",
+      "signature": "export type FAQSectionProps = { title?: string; description?: string; faqs: FAQItem[]; className?: string; /** Whether to include the FAQ schema for SEO */ includeSchema?: boolean; };",
+      "jsdocSummary": "Props for FAQSection component"
+    },
+    {
+      "subpath": ".",
+      "name": "FAQVisibleProps",
+      "kind": "type",
+      "signature": "export type FAQVisibleProps = { title?: string; description?: string; faqs: FAQItem[]; className?: string; includeSchema?: boolean; };",
+      "jsdocSummary": "Props for the FAQVisible server component"
+    },
+    {
+      "subpath": ".",
+      "name": "generateLlmsFullTxt",
+      "kind": "function",
+      "signature": "export declare function generateLlmsFullTxt(input: LlmsFullTxtInput): string;",
+      "jsdocSummary": "Generates an extended llms-full.txt with additional detail sections. Used for comprehensive AI model consumption with full capabilities listing."
+    },
+    {
+      "subpath": ".",
+      "name": "generateLlmsTxt",
+      "kind": "function",
+      "signature": "export declare function generateLlmsTxt(input: LlmsTxtInput): string;",
+      "jsdocSummary": "Generates an llms.txt file content as a markdown string."
+    },
+    {
+      "subpath": ".",
+      "name": "HowToSchemaProps",
+      "kind": "type",
+      "signature": "export type HowToSchemaProps = { name: string; description: string; steps: HowToStep[]; /** ISO 8601 duration format, e.g., \"PT5M\" for 5 minutes */ totalTime?: string; };",
+      "jsdocSummary": "Props for HowToSchema"
+    },
+    {
+      "subpath": ".",
+      "name": "HowToStep",
+      "kind": "type",
+      "signature": "export type HowToStep = { name: string; text: string; image?: string; };",
+      "jsdocSummary": ""
+    },
+    {
+      "subpath": ".",
+      "name": "ItemListItem",
+      "kind": "type",
+      "signature": "export type ItemListItem = { name: string; url: string; description?: string; };",
+      "jsdocSummary": ""
+    },
+    {
+      "subpath": ".",
+      "name": "ItemListSchemaProps",
+      "kind": "type",
+      "signature": "export type ItemListSchemaProps = { name: string; description: string; items: ItemListItem[]; id: string; siteUrl: string; };",
+      "jsdocSummary": "Props for ItemListSchema"
+    },
+    {
+      "subpath": ".",
+      "name": "LlmsFullTxtInput",
+      "kind": "type",
+      "signature": "export type LlmsFullTxtInput = LlmsTxtInput & { details: Record<string, string>; };",
+      "jsdocSummary": "Input for llms-full.txt generation (extended version)"
+    },
+    {
+      "subpath": ".",
+      "name": "LlmsTxtInput",
+      "kind": "type",
+      "signature": "export type LlmsTxtInput = { name: string; tagline: string; description: string; sections: LlmsTxtSection[]; };",
+      "jsdocSummary": "Input for llms.txt generation"
+    },
+    {
+      "subpath": ".",
+      "name": "LlmsTxtItem",
+      "kind": "type",
+      "signature": "export type LlmsTxtItem = { title: string; url: string; description: string; };",
+      "jsdocSummary": "Item for llms.txt generation"
+    },
+    {
+      "subpath": ".",
+      "name": "LlmsTxtSection",
+      "kind": "type",
+      "signature": "export type LlmsTxtSection = { heading: string; items: LlmsTxtItem[]; };",
+      "jsdocSummary": "Section grouping for llms.txt"
+    },
+    {
+      "subpath": ".",
+      "name": "OrganizationSchemaProps",
+      "kind": "type",
+      "signature": "export type OrganizationSchemaProps = SiteIdentityProps & { authorName: string; /** Path to logo relative to siteUrl. Defaults to '/icon.png' */ logoPath?: string; /** Social media profile URLs for sameAs property */ sameAs?: string[]; };",
+      "jsdocSummary": "Props for OrganizationSchema"
+    },
+    {
+      "subpath": ".",
+      "name": "RelatedItem",
+      "kind": "type",
+      "signature": "export type RelatedItem = { key: string; title: string; description: string; };",
+      "jsdocSummary": "Item shape for RelatedItems component"
+    },
+    {
+      "subpath": ".",
+      "name": "renderRobotsTxt",
+      "kind": "function",
+      "signature": "export declare function renderRobotsTxt(options: RobotsTxtOptions): string;",
+      "jsdocSummary": "Builds the body of a robots.txt file."
+    },
+    {
+      "subpath": ".",
+      "name": "renderSitemapIndex",
+      "kind": "function",
+      "signature": "export declare function renderSitemapIndex(entries: readonly SitemapIndexEntry[]): string;",
+      "jsdocSummary": "Renders a sitemap index XML body that points at sharded sitemaps. Use when a single sitemap would exceed the 50,000-URL Google limit."
+    },
+    {
+      "subpath": ".",
+      "name": "renderUrlset",
+      "kind": "function",
+      "signature": "export declare function renderUrlset(entries: readonly SitemapEntry[]): string;",
+      "jsdocSummary": "Renders a sitemap urlset XML body. An entry with an Invalid Date is listed without `<lastmod>`. Use directly when you need the raw string; otherwise prefer `sitemapResponse`."
+    },
+    {
+      "subpath": ".",
+      "name": "RobotsTxtOptions",
+      "kind": "type",
+      "signature": "export type RobotsTxtOptions = { /** Absolute base URL of the site, used to build the `Sitemap:` line. */ baseUrl: string; /** Path of the sitemap relative to `baseUrl`. Defaults to `/sitemap.xml`. */ sitemapPath?: string; /** * Paths blocked for the wildcard `*` user-agent. Defaults to `['/api/', '/auth/']`. * Pass `[]` to allow everything. */ disallow?: readonly string[]; /** * AI crawler user-agents to explicitly allow with their own permissive rule. * Defaults to GPTBot, ClaudeBot, PerplexityBot, Applebot, Bingbot, Google-Extended. * Pass `[]` to omit AI-specific rules entirely (e.g. for apps that should not be * indexed by AI), or pass a custom list. */ allowAiBots?: readonly string[]; /** Extra rule blocks appended verbatim after the default rules. */ extraRules?: readonly string[]; };",
+      "jsdocSummary": "Framework-agnostic robots.txt builder."
+    },
+    {
+      "subpath": ".",
+      "name": "robotsTxtResponse",
+      "kind": "function",
+      "signature": "export declare function robotsTxtResponse(options: RobotsTxtOptions & { cacheSeconds?: number; }): Response;",
+      "jsdocSummary": "Builds a complete `Response` for a `/robots.txt` route. Sets `Content-Type: text/plain; charset=utf-8` and a 1-day cache by default."
+    },
+    {
+      "subpath": ".",
+      "name": "SiteIdentityProps",
+      "kind": "type",
+      "signature": "export type SiteIdentityProps = { siteName: string; siteUrl: string; siteDescription: string; };",
+      "jsdocSummary": "Common site identity props required by Organization and WebSite schemas"
+    },
+    {
+      "subpath": ".",
+      "name": "SitemapEntry",
+      "kind": "type",
+      "signature": "export type SitemapEntry = { /** Absolute URL of the page. Will be XML-escaped automatically. */ url: string; /** Date the page was last modified. */ lastModified: Date; /** Hint for crawlers about how often the page changes. Optional. */ changeFrequency?: ChangeFreq; /** SEO weight 0.0–1.0. Optional; defaults to omitted (search engines treat as 0.5). */ priority?: number; };",
+      "jsdocSummary": ""
+    },
+    {
+      "subpath": ".",
+      "name": "SitemapIndexEntry",
+      "kind": "type",
+      "signature": "export type SitemapIndexEntry = { /** Absolute URL of the shard sitemap. Will be XML-escaped automatically. */ url: string; /** Date the shard was last regenerated. */ lastModified: Date; };",
+      "jsdocSummary": ""
+    },
+    {
+      "subpath": ".",
+      "name": "sitemapIndexResponse",
+      "kind": "function",
+      "signature": "export declare function sitemapIndexResponse(options: { shards: readonly SitemapIndexEntry[]; cacheSeconds?: number; }): Response;",
+      "jsdocSummary": "Builds a complete `Response` for a sitemap index that points at shard sitemaps."
+    },
+    {
+      "subpath": ".",
+      "name": "sitemapResponse",
+      "kind": "function",
+      "signature": "export declare function sitemapResponse(options: { entries: readonly SitemapEntry[]; cacheSeconds?: number; }): Response;",
+      "jsdocSummary": "Builds a complete `Response` for a `/sitemap.xml` route. Sets `Content-Type: application/xml; charset=utf-8` and a 1-hour cache by default."
+    },
+    {
+      "subpath": ".",
+      "name": "SoftwareApplicationSchemaProps",
+      "kind": "type",
+      "signature": "export type SoftwareApplicationSchemaProps = { name: string; description: string; url: string; category: string; keywords?: string[]; id: string; siteName: string; siteUrl: string; };",
+      "jsdocSummary": "Props for SoftwareApplicationSchema"
+    },
+    {
+      "subpath": ".",
+      "name": "TechArticleSchemaProps",
+      "kind": "type",
+      "signature": "export type TechArticleSchemaProps = { /** Guide title used as the article headline */ title: string; /** Guide summary used as article description */ description: string; /** Full canonical URL of the variant page */ url: string; /** Article publication and modification dates */ articleMeta: ArticleMetaData; /** Site identity for publisher information */ siteName: string; /** Site URL for publisher information */ siteUrl: string; /** Author name */ authorName: string; };",
+      "jsdocSummary": "Props for TechArticleSchema"
+    },
+    {
+      "subpath": ".",
+      "name": "WebSiteSchemaProps",
+      "kind": "type",
+      "signature": "export type WebSiteSchemaProps = SiteIdentityProps & { /** URL template for sitelinks search box, e.g. '/search?q={search_term_string}' */ searchUrlTemplate?: string; };",
+      "jsdocSummary": "Props for WebSiteSchema"
+    },
+    {
+      "subpath": "./react",
+      "name": "ActionableInsights",
+      "kind": "function",
+      "signature": "export declare function ActionableInsights({ heading, content, actionItems, className, }: ActionableInsightsProps): import(\"react\").JSX.Element | null;",
+      "jsdocSummary": "Server-rendered action items section with heading, introductory content, and a bulleted list of recommended next steps."
+    },
+    {
+      "subpath": "./react",
+      "name": "ArticleSchema",
+      "kind": "function",
+      "signature": "export declare function ArticleSchema({ article, siteName, siteUrl }: ArticleSchemaProps): import(\"react\").JSX.Element;",
+      "jsdocSummary": "Article schema for blog posts and content pages. Displays article rich snippets with author and date."
+    },
+    {
+      "subpath": "./react",
+      "name": "BreadcrumbSchema",
+      "kind": "function",
+      "signature": "export declare function BreadcrumbSchema({ items, siteUrl }: BreadcrumbSchemaProps): import(\"react\").JSX.Element;",
+      "jsdocSummary": "BreadcrumbList schema for navigation breadcrumbs. Displays breadcrumb trail in search results."
+    },
+    {
+      "subpath": "./react",
+      "name": "DeepDiveShowcase",
+      "kind": "function",
+      "signature": "export declare function DeepDiveShowcase({ title, deepDives, className, }: DeepDiveShowcaseProps): import(\"react\").JSX.Element | null;",
+      "jsdocSummary": "Server-rendered rich examples with multi-step calculation walkthroughs."
+    },
+    {
+      "subpath": "./react",
+      "name": "EducationalContent",
+      "kind": "function",
+      "signature": "export declare function EducationalContent({ sections, className }: EducationalContentProps): import(\"react\").JSX.Element | null;",
+      "jsdocSummary": "Server-rendered educational content with semantic HTML."
+    },
+    {
+      "subpath": "./react",
+      "name": "ExampleShowcase",
+      "kind": "function",
+      "signature": "export declare function ExampleShowcase({ title, examples, className, renderExampleAction, }: ExampleShowcaseProps): React.JSX.Element | null;",
+      "jsdocSummary": "Server-rendered worked examples with self-contained paragraphs."
+    },
+    {
+      "subpath": "./react",
+      "name": "FAQCompact",
+      "kind": "function",
+      "signature": "export declare function FAQCompact({ faqs, className, includeSchema, }: { faqs: FAQItem[]; className?: string; includeSchema?: boolean; }): import(\"react\").JSX.Element | null;",
+      "jsdocSummary": "Compact FAQ list using native details/summary elements. Suitable for sidebars or smaller sections."
+    },
+    {
+      "subpath": "./react",
+      "name": "FAQSchema",
+      "kind": "function",
+      "signature": "export declare function FAQSchema({ faqs }: FAQSchemaProps): import(\"react\").JSX.Element | null;",
+      "jsdocSummary": "FAQPage schema for FAQ sections. Displays FAQ accordion in search results."
+    },
+    {
+      "subpath": "./react",
+      "name": "FAQSection",
+      "kind": "function",
+      "signature": "export declare function FAQSection({ title, description, faqs, className, includeSchema, initialCount, expandLabel, collapseLabel, }: FAQSectionProps): import(\"react\").JSX.Element | null;",
+      "jsdocSummary": "FAQ Section component with accordion functionality and optional schema.org markup. Provides both user-friendly UI and SEO-optimized structured data."
+    },
+    {
+      "subpath": "./react",
+      "name": "FAQVisible",
+      "kind": "function",
+      "signature": "export declare function FAQVisible({ title, description, faqs, className, includeSchema, }: FAQVisibleProps): import(\"react\").JSX.Element | null;",
+      "jsdocSummary": "Server-rendered FAQ section with all answers visible in static HTML."
+    },
+    {
+      "subpath": "./react",
+      "name": "HowToSchema",
+      "kind": "function",
+      "signature": "export declare function HowToSchema({ name, description, steps, totalTime, }: HowToSchemaProps): import(\"react\").JSX.Element;",
+      "jsdocSummary": "HowTo schema for step-by-step guides. Displays step-by-step instructions in search results."
+    },
+    {
+      "subpath": "./react",
+      "name": "ItemListSchema",
+      "kind": "function",
+      "signature": "export declare function ItemListSchema({ name, description, items, id, siteUrl, }: ItemListSchemaProps): import(\"react\").JSX.Element;",
+      "jsdocSummary": "ItemList schema for category pages listing multiple items."
+    },
+    {
+      "subpath": "./react",
+      "name": "JsonLdScript",
+      "kind": "function",
+      "signature": "export declare function JsonLdScript({ id, data }: { id: string; data: WithContext<Thing>; }): import(\"react\").JSX.Element;",
+      "jsdocSummary": "Renders JSON-LD structured data as an inline script element."
+    },
+    {
+      "subpath": "./react",
+      "name": "OrganizationSchema",
+      "kind": "function",
+      "signature": "export declare function OrganizationSchema({ siteName, siteUrl, siteDescription, authorName, logoPath, sameAs, }: OrganizationSchemaProps): import(\"react\").JSX.Element;",
+      "jsdocSummary": "Organization schema for the homepage. Helps Google understand your brand and display in knowledge panels."
+    },
+    {
+      "subpath": "./react",
+      "name": "RelatedItems",
+      "kind": "function",
+      "signature": "export declare function RelatedItems({ items, title, description, className, includeSchema, schemaId, itemLabel, hrefBuilder, icon: Icon, siteUrl, }: RelatedItemsProps): import(\"react\").JSX.Element | null;",
+      "jsdocSummary": "Related items section for internal linking and SEO. Displays a grid of related items with optional schema.org markup. Generalized from domain-specific patterns to work across any app."
+    },
+    {
+      "subpath": "./react",
+      "name": "RelatedItemsCompact",
+      "kind": "function",
+      "signature": "export declare function RelatedItemsCompact({ items, title, className, hrefBuilder, icon: Icon, }: { items: RelatedItem[]; title?: string; className?: string; hrefBuilder?: (key: string) => string; icon?: ComponentType<{ className?: string; }>; }): import(\"react\").JSX.Element | null;",
+      "jsdocSummary": "Compact inline list of related items for sidebar or footer."
+    },
+    {
+      "subpath": "./react",
+      "name": "SoftwareApplicationSchema",
+      "kind": "function",
+      "signature": "export declare function SoftwareApplicationSchema({ name, description, url, category, keywords, id, siteName, siteUrl, }: SoftwareApplicationSchemaProps): import(\"react\").JSX.Element;",
+      "jsdocSummary": "SoftwareApplication schema for web-based tools and applications."
+    },
+    {
+      "subpath": "./react",
+      "name": "TechArticleSchema",
+      "kind": "function",
+      "signature": "export declare function TechArticleSchema({ title, description, url, articleMeta, siteName, siteUrl, authorName, }: TechArticleSchemaProps): import(\"react\").JSX.Element;",
+      "jsdocSummary": "TechArticle JSON-LD structured data for variant guide pages."
+    },
+    {
+      "subpath": "./react",
+      "name": "ToolSEOContent",
+      "kind": "function",
+      "signature": "export declare function ToolSEOContent({ educationalContent, examples, actionableInsights, faqs, howToSteps, howToName, howToDescription, faqTitle, examplesTitle, renderExampleAction, className, deepDives, }: ToolSEOContentProps): import(\"react\").JSX.Element | null;",
+      "jsdocSummary": "Composite server component that assembles all SEO content sections for a tool page."
+    },
+    {
+      "subpath": "./react",
+      "name": "ToolSEOContentProps",
+      "kind": "type",
+      "signature": "export type ToolSEOContentProps = { educationalContent?: EducationalSection[]; examples?: ExampleItem[]; actionableInsights?: ActionableInsightsData; faqs?: FAQItem[]; howToSteps?: HowToStep[]; howToName?: string; howToDescription?: string; faqTitle?: string; examplesTitle?: string; /** Render prop for interactive \"try this example\" actions. Passed through to ExampleShowcase. */ renderExampleAction?: (inputs: Record<string, unknown>) => ReactNode; className?: string; /** Rich deep-dive examples with multi-step calculations */ deepDives?: DeepDiveExample[]; };",
+      "jsdocSummary": "Props for the ToolSEOContent composite component"
+    },
+    {
+      "subpath": "./react",
+      "name": "WebSiteSchema",
+      "kind": "function",
+      "signature": "export declare function WebSiteSchema({ siteName, siteUrl, siteDescription, searchUrlTemplate, }: WebSiteSchemaProps): import(\"react\").JSX.Element;",
+      "jsdocSummary": "WebSite schema with optional SearchAction for sitelinks search box."
+    },
+    {
+      "subpath": "./tanstack-start",
+      "name": "Head",
+      "kind": "function",
+      "signature": "export declare function Head(props: HeadProps): React.ReactElement;",
+      "jsdocSummary": "Head component for document head management Use with TanStack Start's built-in head support"
+    },
+    {
+      "subpath": "./tanstack-start",
+      "name": "HeadProps",
+      "kind": "type",
+      "signature": "export type HeadProps = { /** * Page title */ title?: string; /** * Meta tags from Meta() function */ meta?: ReturnType<typeof Meta>; /** * Children elements for the head */ children?: React.ReactNode; };",
+      "jsdocSummary": ""
+    },
+    {
+      "subpath": "./tanstack-start",
+      "name": "Meta",
+      "kind": "function",
+      "signature": "export declare function Meta(props: MetaProps): { name?: string; property?: string; content: string; }[];",
+      "jsdocSummary": "Generates meta tags for the document head"
+    },
+    {
+      "subpath": "./tanstack-start",
+      "name": "MetaProps",
+      "kind": "type",
+      "signature": "export type MetaProps = { /** * Page title */ title?: string; /** * Title template (e.g., \"%s | My App\") */ titleTemplate?: string; /** * Page description */ description?: string; /** * Canonical URL */ canonical?: string; /** * Open Graph metadata */ openGraph?: { title?: string; description?: string; type?: 'website' | 'article' | 'product'; url?: string; siteName?: string; images?: { url: string; width?: number; height?: number; alt?: string; }[]; locale?: string; publishedTime?: string; authors?: string[]; }; /** * Twitter Card metadata */ twitter?: { card?: 'summary' | 'summary_large_image' | 'player'; site?: string; creator?: string; title?: string; description?: string; image?: string; }; /** * Additional meta tags */ additionalMetaTags?: { name?: string; property?: string; content: string; }[]; /** * Additional link tags */ additionalLinkTags?: { rel: string; href: string; sizes?: string; type?: string; }[]; /** * Robots meta tag */ robots?: { index?: boolean; follow?: boolean; noarchive?: boolean; nosnippet?: boolean; noimageindex?: boolean; }; };",
+      "jsdocSummary": ""
+    },
+    {
+      "subpath": "./tanstack-start",
+      "name": "Scripts",
+      "kind": "function",
+      "signature": "export declare function Scripts(_props: ScriptsProps): null;",
+      "jsdocSummary": "Scripts component placeholder TanStack Start handles script injection automatically"
+    },
+    {
+      "subpath": "./tanstack-start",
+      "name": "ScriptsProps",
+      "kind": "type",
+      "signature": "export type ScriptsProps = { /** * Defer script loading * @default true */ defer?: boolean; /** * Async script loading * @default false */ async?: boolean; };",
+      "jsdocSummary": ""
+    }
+  ],
+  "groups": [],
+  "errorCodes": []
+}
