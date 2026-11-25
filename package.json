@@ -17,7 +17,7 @@
     "dist/api-names/**"
   ],
   "name": "@arki/seo",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "SEO building blocks for web apps: metadata, robots.txt, sitemap.xml and llms.txt builders, JSON-LD schema components, and a TanStack Start head adapter.",
   "license": "MIT",
   "repository": {
@@ -62,11 +62,11 @@
     "schema-dts": "^2.1.0"
   },
   "peerDependencies": {
-    "@arki/icons": "^0.2.0",
-    "@arki/ui": "^0.2.0",
-    "@tanstack/react-router": "^1.170.45",
-    "react": "^19.3.0",
-    "react-dom": "^19.3.0"
+    "@arki/icons": "^0.2.1",
+    "@arki/ui": "^0.2.1",
+    "@tanstack/react-router": "^1.170.46",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
   },
   "peerDependenciesMeta": {
     "@arki/icons": {
@@ -89,6 +89,13 @@
     "access": "public"
   },
   "arki": {
+    "runtimes": [
+      "node",
+      "bun",
+      "deno",
+      "browser",
+      "hermes"
+    ],
     "bundlerOnly": [
       "./react"
     ]
